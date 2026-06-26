@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitob - Kutubxona</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+    
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i data-lucide="library"></i>
+            <span>Kutubxona</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Bosh sahifa</a>
+            <a href="catalog.html">Kitoblar</a>
+        </div>
+        <div class="nav-auth" id="nav-auth-section"></div>
+    </nav>
+
+    <main id="app-root" class="animate-fade-in">
+        <a href="catalog.html" class="btn-outline" style="margin-bottom: 2rem;">
+            <i data-lucide="arrow-left"></i> Orqaga
+        </a>
+        
+        <div id="bookDetail">
+            <div style="text-align: center; padding: 5rem;">
+                <i data-lucide="loader" class="animate-spin" style="width: 48px; height: 48px; color: var(--accent-primary);"></i>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 TATU Kutubxona. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = urlParams.get('id');
+            const container = document.getElementById('bookDetail');
+
+            if (!bookId) {
+                container.innerHTML = `<div style="text-align: center; color: var(--error-color);">Kitob ID topilmadi!</div>`;
+                return;
+            }
+
+            try {
+                const book = await app.apiCall(`/books/books/${bookId}/`);
+                
+                document.title = `${book.title} - Kutubxona`;
+
+                container.innerHTML = `
+                    <div class="detail-layout">
+                        <div>
+                            <div class="detail-cover" style="height: 500px; background: var(--surface-color); display: flex; align-items: center; justify-content: center;">
+                                 ${book.cover_image ? `<img src="${book.cover_image}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">` : '<i data-lucide="book" style="width: 120px; height: 120px; color: var(--text-secondary);"></i>'}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="detail-header">
+                                <h1 class="detail-title">${book.title}</h1>
+                                <div class="detail-author">${book.author_name || 'Noma\'lum muallif'}</div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+                                <div class="book-stats" style="font-size: 1.1rem;">
+                                    <span><i data-lucide="star" style="color: #fbbf24;"></i> ${book.average_rating || '0.0'} reyting</span>
+                                    <span><i data-lucide="book-open"></i> ${book.pages || '?'} bet</span>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 2rem;">
+                                <h3 style="margin-bottom: 1rem;">Tavsif</h3>
+                                <p style="color: var(--text-secondary); line-height: 1.8;">
+                                    ${book.description || 'Ushbu kitob haqida ma\'lumot kiritilmagan.'}
+                                </p>
+                            </div>
+                            
+                            <div class="detail-actions">
+                                <button class="btn-primary" onclick="reserveBook(${book.id})" style="flex: 1; justify-content: center;">
+                                    <i data-lucide="bookmark"></i> Band qilish
+                                </button>
+                                <button class="btn-outline" onclick="likeBook(${book.id})">
+                                    <i data-lucide="heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+            } catch (error) {
+                container.innerHTML = `<div style="text-align: center; color: var(--error-color);">Kitob ma'lumotlarini yuklashda xatolik yuz berdi.</div>`;
+            }
+        });
+
+        function reserveBook(id) {
+            if (!app.token) {
+                app.showToast("Avval tizimga kiring", "error");
+                setTimeout(() => window.location.href = 'login.html', 1500);
+                return;
+            }
+            app.showToast("Kitob muvaffaqiyatli band qilindi! (Simulyatsiya)", "success");
+        }
+        
+        function likeBook(id) {
+            app.showToast("Kitob yoqdi!", "success");
+        }
+    </script>
+</body>
+</html>
