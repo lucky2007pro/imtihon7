@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from shared.utils import send_to_email
-from .models import CustomUser, CodeVerify, VIA_EMAIL, VIA_PHONE, NEW, CODE_VERIFY, CHANGE_INFO, CHANGE_DONE
+from .models import CustomUser, CodeVerify, VIA_EMAIL, VIA_PHONE, NEW, CODE_VERIFY, CHANGE_INFO, CHANGE_DONE, LIBRARIAN, ORDINARY_USER
 from shared.utility import check_email_or_phone
 from rest_framework.exceptions import ValidationError
 from django.utils import timezone
@@ -57,11 +57,15 @@ class SignUpSerializer(serializers.ModelSerializer):
     def validate_email_or_phone(self, value):
         input_type, normalized = check_email_or_phone(value)
         if input_type == 'email':
-            exists = CustomUser.objects.filter(email=normalized).exists()
+            user = CustomUser.objects.filter(email=normalized).first()
         else:
-            exists = CustomUser.objects.filter(phone_number=normalized).exists()
-        if exists:
-            raise ValidationError("Bu email yoki telefon raqami allaqachon ro'yxatdan o'tgan.")
+            user = CustomUser.objects.filter(phone_number=normalized).first()
+            
+        if user:
+            if user.auth_status == NEW:
+                user.delete()
+            else:
+                raise ValidationError("Bu email yoki telefon raqami allaqachon ro'yxatdan o'tgan.")
         return value
 
     def to_representation(self, instance):
@@ -145,11 +149,21 @@ class ChangeProfileInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'password', 'confirm_password', 'user_role']
+        fields = ['first_name', 'last_name', 'password', 'confirm_password', 'user_role', 'library_name', 'library_location', 'library_lat', 'library_lng']
 
     def validate(self, attrs):
         if attrs.get('password') and attrs.get('confirm_password') and attrs['password'] != attrs['confirm_password']:
             raise ValidationError({"password": "Parollar bir-biriga mos kelmadi!"})
+            
+        user_role = attrs.get('user_role')
+        if user_role == LIBRARIAN:
+            if not self.initial_data.get('library_name'):
+                raise ValidationError({"library_name": "Kutubxonachi o'z kutubxonasining nomini kiritishi shart."})
+            if not self.initial_data.get('library_location'):
+                raise ValidationError({"library_location": "Kutubxonaning joylashuvini kiritish shart."})
+            if not self.initial_data.get('library_lat') or not self.initial_data.get('library_lng'):
+                raise ValidationError({"xatolik": "Kutubxonaning aniq xaritadagi koordinatalari (lat, lng) kiritilishi shart."})
+            
         return attrs
 
     def update(self, instance, validated_data):
@@ -159,6 +173,15 @@ class ChangeProfileInfoSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.user_role = validated_data.get('user_role', instance.user_role)
+        
+        if instance.user_role == LIBRARIAN:
+            instance.library_name = self.initial_data.get('library_name')
+            instance.library_location = self.initial_data.get('library_location')
+            instance.library_lat = self.initial_data.get('library_lat')
+            instance.library_lng = self.initial_data.get('library_lng')
+            instance.is_approved = False
+        else:
+            instance.is_approved = True
 
         if password:
             instance.set_password(password)
@@ -177,11 +200,21 @@ class CompleteProfileInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'password', 'confirm_password', 'user_role']
+        fields = ['first_name', 'last_name', 'password', 'confirm_password', 'user_role', 'library_name', 'library_location', 'library_lat', 'library_lng']
 
     def validate(self, attrs):
         if attrs.get('password') and attrs.get('confirm_password') and attrs['password'] != attrs['confirm_password']:
             raise ValidationError({"password": "Parollar bir-biriga mos kelmadi!"})
+            
+        user_role = attrs.get('user_role')
+        if user_role == LIBRARIAN:
+            if not self.initial_data.get('library_name'):
+                raise ValidationError({"library_name": "Kutubxonachi o'z kutubxonasining nomini kiritishi shart."})
+            if not self.initial_data.get('library_location'):
+                raise ValidationError({"library_location": "Kutubxonaning joylashuvini kiritish shart."})
+            if not self.initial_data.get('library_lat') or not self.initial_data.get('library_lng'):
+                raise ValidationError({"xatolik": "Kutubxonaning aniq xaritadagi koordinatalari (lat, lng) kiritilishi shart."})
+            
         return attrs
 
     def update(self, instance, validated_data):
@@ -191,6 +224,15 @@ class CompleteProfileInfoSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.user_role = validated_data.get('user_role', instance.user_role)
+        
+        if instance.user_role == LIBRARIAN:
+            instance.library_name = self.initial_data.get('library_name')
+            instance.library_location = self.initial_data.get('library_location')
+            instance.library_lat = self.initial_data.get('library_lat')
+            instance.library_lng = self.initial_data.get('library_lng')
+            instance.is_approved = False
+        else:
+            instance.is_approved = True
 
         if password:
             instance.set_password(password)
@@ -241,6 +283,9 @@ class LoginSerializer(serializers.Serializer):
 
         if not user.is_active:
             raise ValidationError({"xatolik": "Foydalanuvchi hisobi faol emas."})
+            
+        if user.user_role == LIBRARIAN and not user.is_approved:
+            raise ValidationError({"xatolik": "Kutubxonachi hisobi hali admin tomonidan tasdiqlanmagan."})
 
         attrs['user'] = user
         return attrs
@@ -252,19 +297,19 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'username', 'first_name', 'last_name',
             'email', 'phone_number', 'photo',
-            'user_role', 'auth_type', 'auth_status',
+            'user_role', 'auth_type', 'auth_status', 'library_name', 'library_location', 'library_lat', 'library_lng', 'is_approved',
             'created_at', 'updated_at',
         ]
         read_only_fields = [
             'id', 'username', 'email', 'phone_number',
-            'auth_type', 'auth_status', 'created_at', 'updated_at',
+            'auth_type', 'auth_status', 'is_approved', 'created_at', 'updated_at',
         ]
 
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'photo', 'user_role']
+        fields = ['first_name', 'last_name', 'photo', 'user_role', 'library_name', 'library_location', 'library_lat', 'library_lng']
 
     def validate_first_name(self, value):
         if value and len(value.strip()) < 2:
@@ -285,7 +330,22 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.user_role = validated_data.get('user_role', instance.user_role)
+        
+        # O'zgartirilishi mumkin bo'lgan holatlar
+        old_role = instance.user_role
+        new_role = validated_data.get('user_role', instance.user_role)
+        instance.user_role = new_role
+        
+        if new_role == LIBRARIAN:
+            instance.library_name = self.initial_data.get('library_name', instance.library_name)
+            instance.library_location = self.initial_data.get('library_location', instance.library_location)
+            instance.library_lat = self.initial_data.get('library_lat', instance.library_lat)
+            instance.library_lng = self.initial_data.get('library_lng', instance.library_lng)
+            if old_role != LIBRARIAN:
+                instance.is_approved = False
+        else:
+            instance.is_approved = True
+            
         photo = validated_data.get('photo', None)
         if photo:
             instance.photo = photo

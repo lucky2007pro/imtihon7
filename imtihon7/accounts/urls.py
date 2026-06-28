@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    SignUpView, xabar, VerifyView, GetNewCode,
+    SignUpView, VerifyView, GetNewCode,
     ChangeProfileInfoView, CompleteProfileInfoView, UploadPhotoInfoView,
     LoginView, LogoutView, ProfileView, ProfileUpdateView,
     ResetPasswordView, ForgotPasswordView, ChangePasswordView,
@@ -20,5 +20,4 @@ urlpatterns = [
     path('change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('reset-password/', ResetPasswordView.as_view(), name='reset-password'),
-    path('xabar/', xabar, name='xabar'),
 ]

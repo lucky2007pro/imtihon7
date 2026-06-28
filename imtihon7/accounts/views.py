@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
@@ -21,19 +22,12 @@ class SignUpView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-@api_view(['GET'])
-@permission_classes([permissions.AllowAny])
-def xabar(request):
-    send_to_email('worldcyber2007@gmail.com', '1234')
-    return Response({
-        'success': True,
-        'message': "Xabar muvaffaqiyatli yuborildi.",
-    }, status=status.HTTP_200_OK)
 
 
 class VerifyView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=VerifySerializer)
     def post(self, request):
         serializer = VerifySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -59,6 +53,7 @@ class VerifyView(APIView):
 class GetNewCode(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=GetNewCodeSerializer)
     def post(self, request):
         serializer = GetNewCodeSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -89,6 +84,7 @@ class ChangeProfileInfoView(APIView):
     def get_object(self):
         return self.request.user
 
+    @extend_schema(request=ChangeProfileInfoSerializer)
     def put(self, request, *args, **kwargs):
         serializer = ChangeProfileInfoSerializer(instance=self.get_object(), data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -102,6 +98,7 @@ class ChangeProfileInfoView(APIView):
             }
         }, status=status.HTTP_200_OK)
 
+    @extend_schema(request=ChangeProfileInfoSerializer)
     def patch(self, request, *args, **kwargs):
         serializer = ChangeProfileInfoSerializer(instance=self.get_object(), data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -122,6 +119,7 @@ class CompleteProfileInfoView(APIView):
     def get_object(self):
         return self.request.user
 
+    @extend_schema(request=CompleteProfileInfoSerializer)
     def put(self, request, *args, **kwargs):
         serializer = CompleteProfileInfoSerializer(instance=self.get_object(), data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -135,6 +133,7 @@ class CompleteProfileInfoView(APIView):
             }
         }, status=status.HTTP_200_OK)
 
+    @extend_schema(request=CompleteProfileInfoSerializer)
     def patch(self, request, *args, **kwargs):
         serializer = CompleteProfileInfoSerializer(instance=self.get_object(), data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -155,6 +154,7 @@ class UploadPhotoInfoView(APIView):
     def get_object(self):
         return self.request.user
 
+    @extend_schema(request=UploadPhotoInfoSerializer)
     def put(self, request, *args, **kwargs):
         serializer = UploadPhotoInfoSerializer(instance=self.get_object(), data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -167,6 +167,7 @@ class UploadPhotoInfoView(APIView):
             }
         }, status=status.HTTP_200_OK)
 
+    @extend_schema(request=UploadPhotoInfoSerializer)
     def patch(self, request, *args, **kwargs):
         serializer = UploadPhotoInfoSerializer(instance=self.get_object(), data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -183,6 +184,7 @@ class UploadPhotoInfoView(APIView):
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=LoginSerializer)
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -282,6 +284,7 @@ class ProfileUpdateView(APIView):
 class ResetPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=ResetPasswordSerializer)
     def post(self, request):
         serializer = ResetPasswordSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -305,6 +308,7 @@ class ResetPasswordView(APIView):
 class ForgotPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    @extend_schema(request=ForgotPasswordSerializer)
     def post(self, request):
         serializer = ForgotPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -334,6 +338,7 @@ class ForgotPasswordView(APIView):
 class ChangePasswordView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
+    @extend_schema(request=ChangePasswordSerializer)
     def post(self, request):
         serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)

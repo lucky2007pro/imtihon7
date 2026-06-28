@@ -57,3 +57,17 @@ class BookLike(BaseModel):
         
     def __str__(self):
         return f"{self.user.username} ♥ {self.book.title}"
+
+class LibraryBook(BaseModel):
+    library = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='library_books', limit_choices_to={'user_role': 'librarian'})
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='library_books')
+    available_copies = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['library', 'book'], name='unique_library_book')
+        ]
+
+    def __str__(self):
+        library_name = self.library.library_name or self.library.username
+        return f"{self.book.title} at {library_name}"

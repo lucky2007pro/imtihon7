@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Section, Author, Book, BookReview, BookLike
+from .models import Section, Author, Book, BookReview, BookLike, LibraryBook
 
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,3 +49,22 @@ class BookLikeSerializer(serializers.ModelSerializer):
         model = BookLike
         fields = ['id', 'user', 'user_name', 'book', 'created_time']
         read_only_fields = ['user']
+
+class LibraryBookSerializer(serializers.ModelSerializer):
+    library_name = serializers.CharField(source='library.library_name', read_only=True)
+    library_location = serializers.CharField(source='library.library_location', read_only=True)
+    book_title = serializers.CharField(source='book.title', read_only=True)
+
+    class Meta:
+        model = LibraryBook
+        fields = ['id', 'library', 'library_name', 'library_location', 'book', 'book_title', 'available_copies']
+        read_only_fields = ['library']
+
+class NearestLibrarySerializer(serializers.Serializer):
+    book_id = serializers.IntegerField()
+    book_title = serializers.CharField()
+    cover_image = serializers.CharField(allow_null=True)
+    library_name = serializers.CharField()
+    library_location = serializers.CharField()
+    distance_km = serializers.FloatField()
+    available_copies = serializers.IntegerField()

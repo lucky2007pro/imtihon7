@@ -4,3 +4,4 @@ django-cors-headers
 pillow
 gunicorn
 whitenoise
+python-dotenv

@@ -8,7 +8,7 @@ from conf.settings import EMAIL_EXPIRATION_TIME, PHONE_EXPIRATION_TIME
 from rest_framework_simplejwt.tokens import RefreshToken
 import string
 
-ORDINARY_USER, SELLER, ADMIN = ('ordinary_user', 'seller', 'admin')
+ORDINARY_USER, LIBRARIAN, ADMIN = ('ordinary_user', 'librarian', 'admin')
 VIA_PHONE, VIA_EMAIL = ('via_phone', 'via_email')
 NEW, CODE_VERIFY, CHANGE_INFO, CHANGE_DONE = ('new', 'code_verify', 'change_info', 'change_done')
 
@@ -16,7 +16,7 @@ NEW, CODE_VERIFY, CHANGE_INFO, CHANGE_DONE = ('new', 'code_verify', 'change_info
 class CustomUser(BaseModel, AbstractUser):
     USER_ROLE = (
         (ORDINARY_USER, ORDINARY_USER),
-        (SELLER, SELLER),
+        (LIBRARIAN, LIBRARIAN),
         (ADMIN, ADMIN),
     )
     AUTH_TYPE = (
@@ -36,6 +36,11 @@ class CustomUser(BaseModel, AbstractUser):
     email = models.EmailField(unique=True, null=True, blank=True)
     phone_number = models.CharField(max_length=20, unique=True, null=True, blank=True)
     photo = models.ImageField(upload_to='users/', null=True, blank=True)
+    library_name = models.CharField(max_length=255, null=True, blank=True)
+    library_location = models.CharField(max_length=255, null=True, blank=True)
+    library_lat = models.FloatField(null=True, blank=True)
+    library_lng = models.FloatField(null=True, blank=True)
+    is_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
@@ -100,8 +105,9 @@ class CodeVerify(BaseModel):
     expiration_time = models.DateTimeField()
 
     def save(self, *args, **kwargs):
-        if self.verify_type == VIA_EMAIL:
-            self.expiration_time = timezone.now() + timezone.timedelta(minutes=EMAIL_EXPIRATION_TIME)
-        else:
-            self.expiration_time = timezone.now() + timezone.timedelta(minutes=PHONE_EXPIRATION_TIME)
+        if not self.expiration_time:
+            if self.verify_type == VIA_EMAIL:
+                self.expiration_time = timezone.now() + timezone.timedelta(minutes=EMAIL_EXPIRATION_TIME)
+            else:
+                self.expiration_time = timezone.now() + timezone.timedelta(minutes=PHONE_EXPIRATION_TIME)
         super().save(*args, **kwargs)
