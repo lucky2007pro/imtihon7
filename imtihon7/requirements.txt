@@ -5,3 +5,5 @@ pillow
 gunicorn
 whitenoise
 python-dotenv
+drf-spectacular
+djangorestframework-simplejwt
