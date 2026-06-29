@@ -17,6 +17,10 @@ class Reservation(BaseModel):
         ('completed', 'Yakunlangan'),
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reservations')
+    library = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='library_reservations',
+        limit_choices_to={'user_role': 'librarian'}, null=True, blank=True
+    )
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reservations')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     expires_at = models.DateTimeField(default=_default_reservation_expiry)
@@ -31,6 +35,10 @@ class Reservation(BaseModel):
 
 class Borrowing(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='borrowings')
+    library = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='library_borrowings',
+        limit_choices_to={'user_role': 'librarian'}, null=True, blank=True
+    )
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='borrowings')
     return_date = models.DateField()
     is_returned = models.BooleanField(default=False)

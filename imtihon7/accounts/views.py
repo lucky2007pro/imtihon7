@@ -26,6 +26,7 @@ class SignUpView(CreateAPIView):
 
 class VerifyView(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = VerifySerializer
 
     @extend_schema(request=VerifySerializer)
     def post(self, request):
@@ -52,6 +53,7 @@ class VerifyView(APIView):
 
 class GetNewCode(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = GetNewCodeSerializer
 
     @extend_schema(request=GetNewCodeSerializer)
     def post(self, request):
@@ -80,6 +82,7 @@ class GetNewCode(APIView):
 
 class ChangeProfileInfoView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ChangeProfileInfoSerializer
 
     def get_object(self):
         return self.request.user
@@ -115,6 +118,7 @@ class ChangeProfileInfoView(APIView):
 
 class CompleteProfileInfoView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CompleteProfileInfoSerializer
 
     def get_object(self):
         return self.request.user
@@ -150,6 +154,7 @@ class CompleteProfileInfoView(APIView):
 
 class UploadPhotoInfoView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UploadPhotoInfoSerializer
 
     def get_object(self):
         return self.request.user
@@ -183,6 +188,7 @@ class UploadPhotoInfoView(APIView):
 
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = LoginSerializer
 
     @extend_schema(request=LoginSerializer)
     def post(self, request):
@@ -211,8 +217,14 @@ class LoginView(APIView):
         }, status=status.HTTP_200_OK)
 
 
+from rest_framework import serializers
+
+class DummyLogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
 class LogoutView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = DummyLogoutSerializer
 
     def post(self, request):
         refresh_token = request.data.get('refresh')
@@ -239,6 +251,7 @@ class LogoutView(APIView):
 
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ProfileSerializer
 
     def get(self, request):
         user = request.user
@@ -252,6 +265,7 @@ class ProfileView(APIView):
 
 class ProfileUpdateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ProfileUpdateSerializer
 
     def put(self, request):
         user = request.user
@@ -283,6 +297,7 @@ class ProfileUpdateView(APIView):
 
 class ResetPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = ResetPasswordSerializer
 
     @extend_schema(request=ResetPasswordSerializer)
     def post(self, request):
@@ -307,6 +322,7 @@ class ResetPasswordView(APIView):
 
 class ForgotPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = ForgotPasswordSerializer
 
     @extend_schema(request=ForgotPasswordSerializer)
     def post(self, request):
@@ -337,6 +353,7 @@ class ForgotPasswordView(APIView):
 
 class ChangePasswordView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
 
     @extend_schema(request=ChangePasswordSerializer)
     def post(self, request):

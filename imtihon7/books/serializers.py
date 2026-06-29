@@ -2,9 +2,12 @@ from rest_framework import serializers
 from .models import Section, Author, Book, BookReview, BookLike, LibraryBook
 
 class SectionSerializer(serializers.ModelSerializer):
+    library_name = serializers.CharField(source='library.library_name', read_only=True, allow_null=True)
+
     class Meta:
         model = Section
-        fields = ['id', 'name', 'created_time', 'updated_time']
+        fields = ['id', 'name', 'library', 'library_name', 'created_time', 'updated_time']
+        read_only_fields = ['library']
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,8 +21,23 @@ class BookSerializer(serializers.ModelSerializer):
     )
     section = SectionSerializer(read_only=True)
     section_id = serializers.PrimaryKeyRelatedField(
-        queryset=Section.objects.all(), source='section', write_only=True, allow_null=True, required=False
+        queryset=Section.objects.none(), source='section', write_only=True, allow_null=True, required=False
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            user = request.user
+            user_role = getattr(user, 'user_role', '')
+            if user_role == 'librarian':
+                # Librarian faqat o'z bo'limlarini tanlaydi
+                self.fields['section_id'].queryset = Section.objects.filter(library=user)
+            else:
+                # Admin barcha bo'limlarni ko'radi
+                self.fields['section_id'].queryset = Section.objects.all()
+        else:
+            self.fields['section_id'].queryset = Section.objects.all()
 
     class Meta:
         model = Book
@@ -28,6 +46,7 @@ class BookSerializer(serializers.ModelSerializer):
             'description', 'published_date', 'isbn', 'cover_image', 
             'pdf_file', 'total_copies', 'view_count', 'created_time', 'updated_time'
         ]
+
 
 class BookReviewSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.username', read_only=True)

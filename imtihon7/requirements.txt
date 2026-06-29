@@ -7,3 +7,4 @@ whitenoise
 python-dotenv
 drf-spectacular
 djangorestframework-simplejwt
+google-genai

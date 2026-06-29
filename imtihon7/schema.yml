@@ -1,0 +1,3167 @@
+openapi: 3.0.3
+info:
+  title: Yakuniy conf API
+  version: 1.0.0
+  description: Yakuniy 7 loyihasi uchun API hujjatlari
+paths:
+  /accounts/change-password/:
+    post:
+      operationId: accounts_change_password_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePassword'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePassword'
+          description: ''
+  /accounts/change-profile-info/:
+    put:
+      operationId: accounts_change_profile_info_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeProfileInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangeProfileInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangeProfileInfo'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProfileInfo'
+          description: ''
+    patch:
+      operationId: accounts_change_profile_info_partial_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeProfileInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeProfileInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeProfileInfo'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProfileInfo'
+          description: ''
+  /accounts/complete-profile/:
+    put:
+      operationId: accounts_complete_profile_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteProfileInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompleteProfileInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompleteProfileInfo'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteProfileInfo'
+          description: ''
+    patch:
+      operationId: accounts_complete_profile_partial_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCompleteProfileInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCompleteProfileInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCompleteProfileInfo'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteProfileInfo'
+          description: ''
+  /accounts/forgot-password/:
+    post:
+      operationId: accounts_forgot_password_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForgotPassword'
+          description: ''
+  /accounts/login/:
+    post:
+      operationId: accounts_login_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /accounts/logout/:
+    post:
+      operationId: accounts_logout_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyLogout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DummyLogout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DummyLogout'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyLogout'
+          description: ''
+  /accounts/new-code/:
+    post:
+      operationId: accounts_new_code_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNewCode'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GetNewCode'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GetNewCode'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNewCode'
+          description: ''
+  /accounts/profile/:
+    get:
+      operationId: accounts_profile_retrieve
+      tags:
+      - accounts
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+  /accounts/profile/update/:
+    put:
+      operationId: accounts_profile_update_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdate'
+          description: ''
+    patch:
+      operationId: accounts_profile_update_partial_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProfileUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProfileUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProfileUpdate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdate'
+          description: ''
+  /accounts/reset-password/:
+    post:
+      operationId: accounts_reset_password_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPassword'
+          description: ''
+  /accounts/signup/:
+    post:
+      operationId: accounts_signup_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUp'
+          description: ''
+  /accounts/upload-photo/:
+    put:
+      operationId: accounts_upload_photo_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadPhotoInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadPhotoInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadPhotoInfo'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPhotoInfo'
+          description: ''
+    patch:
+      operationId: accounts_upload_photo_partial_update
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUploadPhotoInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUploadPhotoInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUploadPhotoInfo'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPhotoInfo'
+          description: ''
+  /accounts/verify/:
+    post:
+      operationId: accounts_verify_create
+      tags:
+      - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Verify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Verify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Verify'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verify'
+          description: ''
+  /books/ai-assistant/:
+    post:
+      operationId: books_ai_assistant_create
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AIRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AIRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIResponse'
+          description: ''
+  /books/authors/:
+    get:
+      operationId: books_authors_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuthorList'
+          description: ''
+    post:
+      operationId: books_authors_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Author'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+          description: ''
+  /books/authors/{id}/:
+    get:
+      operationId: books_authors_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this author.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+          description: ''
+    put:
+      operationId: books_authors_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this author.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Author'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+          description: ''
+    patch:
+      operationId: books_authors_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this author.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAuthor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAuthor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAuthor'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+          description: ''
+    delete:
+      operationId: books_authors_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this author.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /books/books/:
+    get:
+      operationId: books_books_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBookList'
+          description: ''
+    post:
+      operationId: books_books_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+  /books/books/{id}/:
+    get:
+      operationId: books_books_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+    put:
+      operationId: books_books_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+    patch:
+      operationId: books_books_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+    delete:
+      operationId: books_books_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /books/inventory/:
+    get:
+      operationId: books_inventory_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLibraryBookList'
+          description: ''
+    post:
+      operationId: books_inventory_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryBook'
+          description: ''
+  /books/inventory/{id}/:
+    get:
+      operationId: books_inventory_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this library book.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryBook'
+          description: ''
+    put:
+      operationId: books_inventory_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this library book.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LibraryBook'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryBook'
+          description: ''
+    patch:
+      operationId: books_inventory_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this library book.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLibraryBook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLibraryBook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLibraryBook'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibraryBook'
+          description: ''
+    delete:
+      operationId: books_inventory_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this library book.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /books/likes/:
+    get:
+      operationId: books_likes_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBookLikeList'
+          description: ''
+    post:
+      operationId: books_likes_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLike'
+          description: ''
+  /books/likes/{id}/:
+    get:
+      operationId: books_likes_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book like.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLike'
+          description: ''
+    put:
+      operationId: books_likes_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book like.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookLike'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLike'
+          description: ''
+    patch:
+      operationId: books_likes_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book like.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBookLike'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBookLike'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBookLike'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLike'
+          description: ''
+    delete:
+      operationId: books_likes_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book like.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /books/reviews/:
+    get:
+      operationId: books_reviews_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBookReviewList'
+          description: ''
+    post:
+      operationId: books_reviews_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+          description: ''
+  /books/reviews/{id}/:
+    get:
+      operationId: books_reviews_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book review.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+          description: ''
+    put:
+      operationId: books_reviews_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book review.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookReview'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+          description: ''
+    patch:
+      operationId: books_reviews_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book review.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBookReview'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBookReview'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBookReview'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+          description: ''
+    delete:
+      operationId: books_reviews_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this book review.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /books/search-nearest/:
+    get:
+      operationId: books_search_nearest_list
+      parameters:
+      - in: query
+        name: lat
+        schema:
+          type: number
+          format: float
+        description: Foydalanuvchi kengligi (latitude)
+        required: true
+      - in: query
+        name: lng
+        schema:
+          type: number
+          format: float
+        description: Foydalanuvchi uzunligi (longitude)
+        required: true
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: Kitob nomi yoki muallifi
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NearestLibrary'
+          description: ''
+  /books/sections/:
+    get:
+      operationId: books_sections_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSectionList'
+          description: ''
+    post:
+      operationId: books_sections_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Section'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Section'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Section'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+  /books/sections/{id}/:
+    get:
+      operationId: books_sections_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this section.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    put:
+      operationId: books_sections_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this section.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Section'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Section'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Section'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    patch:
+      operationId: books_sections_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this section.
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSection'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Section'
+          description: ''
+    delete:
+      operationId: books_sections_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this section.
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /library/borrowings/:
+    get:
+      operationId: library_borrowings_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBorrowingList'
+          description: ''
+    post:
+      operationId: library_borrowings_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+          description: ''
+  /library/borrowings/{id}/:
+    get:
+      operationId: library_borrowings_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this borrowing.
+        required: true
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+          description: ''
+    put:
+      operationId: library_borrowings_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this borrowing.
+        required: true
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Borrowing'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+          description: ''
+    patch:
+      operationId: library_borrowings_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this borrowing.
+        required: true
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBorrowing'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBorrowing'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBorrowing'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Borrowing'
+          description: ''
+    delete:
+      operationId: library_borrowings_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this borrowing.
+        required: true
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /library/reservations/:
+    get:
+      operationId: library_reservations_list
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReservationList'
+          description: ''
+    post:
+      operationId: library_reservations_create
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /library/reservations/{id}/:
+    get:
+      operationId: library_reservations_retrieve
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this reservation.
+        required: true
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    put:
+      operationId: library_reservations_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this reservation.
+        required: true
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    patch:
+      operationId: library_reservations_partial_update
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this reservation.
+        required: true
+      tags:
+      - library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReservation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReservation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReservation'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    delete:
+      operationId: library_reservations_destroy
+      description: ModelViewSet that wraps all standard responses in { success, message,
+        data }.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this reservation.
+        required: true
+      tags:
+      - library
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    AIRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: Savolingizni kiriting
+      required:
+      - prompt
+    AIResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        response:
+          type: string
+      required:
+      - response
+      - success
+    AuthStatusEnum:
+      enum:
+      - new
+      - code_verify
+      - change_info
+      - change_done
+      type: string
+      description: |-
+        * `new` - new
+        * `code_verify` - code_verify
+        * `change_info` - change_info
+        * `change_done` - change_done
+    AuthTypeEnum:
+      enum:
+      - via_phone
+      - via_email
+      type: string
+      description: |-
+        * `via_phone` - via_phone
+        * `via_email` - via_email
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        bio:
+          type: string
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_time
+      - first_name
+      - id
+      - last_name
+      - updated_time
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        author:
+          allOf:
+          - $ref: '#/components/schemas/Author'
+          readOnly: true
+        author_id:
+          type: string
+          format: uuid
+          writeOnly: true
+          nullable: true
+        section:
+          allOf:
+          - $ref: '#/components/schemas/Section'
+          readOnly: true
+        section_id:
+          type: string
+          format: uuid
+          writeOnly: true
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        published_date:
+          type: string
+          format: date
+          nullable: true
+        isbn:
+          type: string
+          nullable: true
+          maxLength: 13
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+        pdf_file:
+          type: string
+          format: uri
+          nullable: true
+        total_copies:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Kutubxonadagi jami nusxalar soni
+        view_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - author
+      - created_time
+      - id
+      - section
+      - title
+      - updated_time
+    BookLike:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - book
+      - created_time
+      - id
+      - user
+      - user_name
+    BookReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        rating:
+          allOf:
+          - $ref: '#/components/schemas/RatingEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        comment:
+          type: string
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - book
+      - created_time
+      - id
+      - rating
+      - user
+      - user_name
+    Borrowing:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_details:
+          allOf:
+          - $ref: '#/components/schemas/Book'
+          readOnly: true
+        return_date:
+          type: string
+          format: date
+        is_returned:
+          type: boolean
+          readOnly: true
+        returned_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - book
+      - book_details
+      - created_time
+      - id
+      - is_returned
+      - return_date
+      - returned_date
+      - updated_time
+      - user
+      - user_name
+    ChangePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+          writeOnly: true
+        new_password:
+          type: string
+          writeOnly: true
+        confirm_new_password:
+          type: string
+          writeOnly: true
+      required:
+      - confirm_new_password
+      - new_password
+      - old_password
+    ChangeProfileInfo:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          writeOnly: true
+        confirm_password:
+          type: string
+          writeOnly: true
+        user_role:
+          type: string
+          maxLength: 100
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+      required:
+      - confirm_password
+      - first_name
+      - last_name
+      - password
+      - user_role
+    CompleteProfileInfo:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          writeOnly: true
+        confirm_password:
+          type: string
+          writeOnly: true
+        user_role:
+          type: string
+          maxLength: 100
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+      required:
+      - confirm_password
+      - first_name
+      - last_name
+      - password
+      - user_role
+    DummyLogout:
+      type: object
+      properties:
+        refresh:
+          type: string
+      required:
+      - refresh
+    ForgotPassword:
+      type: object
+      properties:
+        email_or_phone:
+          type: string
+      required:
+      - email_or_phone
+    GetNewCode:
+      type: object
+      properties:
+        email_or_phone:
+          type: string
+      required:
+      - email_or_phone
+    LibraryBook:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        library:
+          type: string
+          format: uuid
+          readOnly: true
+        library_name:
+          type: string
+          readOnly: true
+        library_location:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_title:
+          type: string
+          readOnly: true
+        available_copies:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - book
+      - book_title
+      - id
+      - library
+      - library_location
+      - library_name
+    Login:
+      type: object
+      properties:
+        user_input:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - user_input
+    NearestLibrary:
+      type: object
+      properties:
+        book_id:
+          type: integer
+        book_title:
+          type: string
+        cover_image:
+          type: string
+          nullable: true
+        library_name:
+          type: string
+        library_location:
+          type: string
+        distance_km:
+          type: number
+          format: double
+        available_copies:
+          type: integer
+      required:
+      - available_copies
+      - book_id
+      - book_title
+      - cover_image
+      - distance_km
+      - library_location
+      - library_name
+    NullEnum:
+      enum:
+      - null
+    PaginatedAuthorList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Author'
+    PaginatedBookLikeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookLike'
+    PaginatedBookList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+    PaginatedBookReviewList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookReview'
+    PaginatedBorrowingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Borrowing'
+    PaginatedLibraryBookList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryBook'
+    PaginatedReservationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reservation'
+    PaginatedSectionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+    PatchedAuthor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        bio:
+          type: string
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedBook:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 200
+        author:
+          allOf:
+          - $ref: '#/components/schemas/Author'
+          readOnly: true
+        author_id:
+          type: string
+          format: uuid
+          writeOnly: true
+          nullable: true
+        section:
+          allOf:
+          - $ref: '#/components/schemas/Section'
+          readOnly: true
+        section_id:
+          type: string
+          format: uuid
+          writeOnly: true
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        published_date:
+          type: string
+          format: date
+          nullable: true
+        isbn:
+          type: string
+          nullable: true
+          maxLength: 13
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+        pdf_file:
+          type: string
+          format: uri
+          nullable: true
+        total_copies:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          description: Kutubxonadagi jami nusxalar soni
+        view_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedBookLike:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedBookReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        rating:
+          allOf:
+          - $ref: '#/components/schemas/RatingEnum'
+          minimum: 0
+          maximum: 9223372036854775807
+        comment:
+          type: string
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedBorrowing:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_details:
+          allOf:
+          - $ref: '#/components/schemas/Book'
+          readOnly: true
+        return_date:
+          type: string
+          format: date
+        is_returned:
+          type: boolean
+          readOnly: true
+        returned_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedChangeProfileInfo:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          writeOnly: true
+        confirm_password:
+          type: string
+          writeOnly: true
+        user_role:
+          type: string
+          maxLength: 100
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+    PatchedCompleteProfileInfo:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        password:
+          type: string
+          writeOnly: true
+        confirm_password:
+          type: string
+          writeOnly: true
+        user_role:
+          type: string
+          maxLength: 100
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+    PatchedLibraryBook:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        library:
+          type: string
+          format: uuid
+          readOnly: true
+        library_name:
+          type: string
+          readOnly: true
+        library_location:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_title:
+          type: string
+          readOnly: true
+        available_copies:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+    PatchedProfileUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        photo:
+          type: string
+          format: uri
+          nullable: true
+        user_role:
+          $ref: '#/components/schemas/UserRoleEnum'
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+    PatchedReservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_details:
+          allOf:
+          - $ref: '#/components/schemas/Book'
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        expires_at:
+          type: string
+          format: date-time
+          readOnly: true
+        note:
+          type: string
+          nullable: true
+          maxLength: 255
+        is_expired:
+          type: boolean
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedSection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedUploadPhotoInfo:
+      type: object
+      properties:
+        photo:
+          type: string
+          format: uri
+    Profile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          nullable: true
+        phone_number:
+          type: string
+          readOnly: true
+          nullable: true
+        photo:
+          type: string
+          format: uri
+          nullable: true
+        user_role:
+          $ref: '#/components/schemas/UserRoleEnum'
+        auth_type:
+          readOnly: true
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AuthTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        auth_status:
+          allOf:
+          - $ref: '#/components/schemas/AuthStatusEnum'
+          readOnly: true
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+        is_approved:
+          type: boolean
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - auth_status
+      - auth_type
+      - created_time
+      - email
+      - id
+      - is_approved
+      - phone_number
+      - updated_time
+      - username
+    ProfileUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        photo:
+          type: string
+          format: uri
+          nullable: true
+        user_role:
+          $ref: '#/components/schemas/UserRoleEnum'
+        library_name:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_location:
+          type: string
+          nullable: true
+          maxLength: 255
+        library_lat:
+          type: number
+          format: double
+          nullable: true
+        library_lng:
+          type: number
+          format: double
+          nullable: true
+    RatingEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: |-
+        * `1` - 1
+        * `2` - 2
+        * `3` - 3
+        * `4` - 4
+        * `5` - 5
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        book:
+          type: string
+          format: uuid
+        book_details:
+          allOf:
+          - $ref: '#/components/schemas/Book'
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        expires_at:
+          type: string
+          format: date-time
+          readOnly: true
+        note:
+          type: string
+          nullable: true
+          maxLength: 255
+        is_expired:
+          type: boolean
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - book
+      - book_details
+      - created_time
+      - expires_at
+      - id
+      - is_expired
+      - status
+      - updated_time
+      - user
+      - user_name
+    ResetPassword:
+      type: object
+      properties:
+        email_or_phone:
+          type: string
+        code:
+          type: string
+          maxLength: 4
+        new_password:
+          type: string
+          writeOnly: true
+        confirm_new_password:
+          type: string
+          writeOnly: true
+      required:
+      - code
+      - confirm_new_password
+      - email_or_phone
+      - new_password
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_time
+      - id
+      - name
+      - updated_time
+    SignUp:
+      type: object
+      properties:
+        email_or_phone:
+          type: string
+          writeOnly: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        auth_type:
+          readOnly: true
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/AuthTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+      required:
+      - auth_type
+      - email_or_phone
+      - id
+    StatusEnum:
+      enum:
+      - pending
+      - active
+      - cancelled
+      - completed
+      type: string
+      description: |-
+        * `pending` - Kutilmoqda
+        * `active` - Tasdiqlangan
+        * `cancelled` - Bekor qilingan
+        * `completed` - Yakunlangan
+    UploadPhotoInfo:
+      type: object
+      properties:
+        photo:
+          type: string
+          format: uri
+    UserRoleEnum:
+      enum:
+      - ordinary_user
+      - librarian
+      - admin
+      type: string
+      description: |-
+        * `ordinary_user` - ordinary_user
+        * `librarian` - librarian
+        * `admin` - admin
+    Verify:
+      type: object
+      properties:
+        email_or_phone:
+          type: string
+        code:
+          type: string
+          maxLength: 4
+      required:
+      - code
+      - email_or_phone
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

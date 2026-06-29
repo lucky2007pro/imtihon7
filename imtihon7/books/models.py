@@ -3,6 +3,14 @@ from django.conf import settings
 from shared.models import BaseModel
 
 class Section(BaseModel):
+    library = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='sections',
+        limit_choices_to={'user_role': 'librarian'},
+        help_text="Qaysi kutubxonaga tegishli bo'lim. Null bo'lsa - umumiy bo'lim."
+    )
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -15,6 +23,9 @@ class Author(BaseModel):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        ordering = ['id']
 
 class Book(BaseModel):
     title = models.CharField(max_length=200)

@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(os.path.join(BASE_DIR, '.env'), override=True)
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-j9nzz7ar4^lrlt*gha_#r&!ye9juwd$(#x$4fluw$unws1-rkq')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
@@ -169,3 +169,6 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

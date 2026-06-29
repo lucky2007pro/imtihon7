@@ -1,7 +1,7 @@
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from shared.custom_responses import CustomModelViewSet
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsAdminOrLibrarian
 import math
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -19,21 +19,37 @@ from .serializers import (
 class SectionViewSet(CustomModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrLibrarian]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
+
+    def get_queryset(self):
+        user = self.request.user
+        qs = super().get_queryset()
+        # Librarian faqat o'z bo'limlarini ko'radi
+        if user.is_authenticated and getattr(user, 'user_role', '') == 'librarian':
+            return qs.filter(library=user)
+        return qs
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        # Librarian yaratganda avtomatik o'ziga bog'lanadi
+        if user.is_authenticated and getattr(user, 'user_role', '') == 'librarian':
+            serializer.save(library=user)
+        else:
+            serializer.save()
 
 class AuthorViewSet(CustomModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrLibrarian]
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name']
 
 class BookViewSet(CustomModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrLibrarian]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'description', 'isbn', 'author__first_name', 'author__last_name']
     ordering_fields = ['title', 'view_count', 'published_date']
@@ -43,6 +59,16 @@ class BookViewSet(CustomModelViewSet):
         instance.view_count += 1
         instance.save(update_fields=['view_count'])
         return super().retrieve(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        book = serializer.save()
+        user = self.request.user
+        if user.is_authenticated and user.user_role == 'librarian':
+            LibraryBook.objects.create(
+                library=user,
+                book=book,
+                available_copies=book.total_copies
+            )
 
 class BookReviewViewSet(CustomModelViewSet):
     queryset = BookReview.objects.all().select_related('user', 'book')
@@ -62,7 +88,7 @@ class BookReviewViewSet(CustomModelViewSet):
 class LibraryBookViewSet(CustomModelViewSet):
     queryset = LibraryBook.objects.all().select_related('library', 'book')
     serializer_class = LibraryBookSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminOrLibrarian]
 
     def get_queryset(self):
         qs = super().get_queryset()

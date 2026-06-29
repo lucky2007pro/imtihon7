@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import SectionViewSet, AuthorViewSet, BookViewSet, BookReviewViewSet, BookLikeViewSet, SearchNearestLibraryView
+from .views import SectionViewSet, AuthorViewSet, BookViewSet, BookReviewViewSet, BookLikeViewSet, SearchNearestLibraryView, LibraryBookViewSet
 
 router = DefaultRouter()
 router.register(r'sections', SectionViewSet)
@@ -10,7 +10,10 @@ router.register(r'reviews', BookReviewViewSet, basename='bookreview')
 router.register(r'likes', BookLikeViewSet, basename='booklike')
 router.register(r'inventory', LibraryBookViewSet, basename='inventory')
 
+from .ai_views import AIAssistantView
+
 urlpatterns = [
     path('search-nearest/', SearchNearestLibraryView.as_view(), name='search-nearest'),
+    path('ai-assistant/', AIAssistantView.as_view(), name='ai-assistant'),
     path('', include(router.urls)),
 ]

@@ -43,7 +43,7 @@ class CustomUser(BaseModel, AbstractUser):
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.username
+        return str(self.email) if self.email else self.username
 
     @property
     def full_name(self):

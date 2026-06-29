@@ -10,7 +10,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = [
-            'id', 'user', 'user_name', 'book', 'book_details', 'status', 
+            'id', 'user', 'user_name', 'library', 'book', 'book_details', 'status', 
             'expires_at', 'note', 'is_expired', 'created_time', 'updated_time'
         ]
         read_only_fields = ['user', 'expires_at', 'status']
@@ -36,10 +36,10 @@ class BorrowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Borrowing
         fields = [
-            'id', 'user', 'user_name', 'book', 'book_details', 'return_date', 
+            'id', 'user', 'user_name', 'library', 'book', 'book_details', 'return_date', 
             'is_returned', 'returned_date', 'created_time', 'updated_time'
         ]
-        read_only_fields = ['user', 'is_returned', 'returned_date']
+        read_only_fields = ['user', 'library', 'is_returned', 'returned_date']
 
     def validate(self, attrs):
         book = attrs.get('book')
