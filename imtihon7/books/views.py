@@ -12,7 +12,8 @@ from django.db import models
 from .models import Section, Author, Book, BookReview, BookLike, LibraryBook
 from .serializers import (
     SectionSerializer, AuthorSerializer, BookSerializer, 
-    BookReviewSerializer, BookLikeSerializer, NearestLibrarySerializer
+    BookReviewSerializer, BookLikeSerializer, NearestLibrarySerializer,
+    LibraryBookSerializer
 )
 
 class SectionViewSet(CustomModelViewSet):
@@ -57,6 +58,20 @@ class BookReviewViewSet(CustomModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class LibraryBookViewSet(CustomModelViewSet):
+    queryset = LibraryBook.objects.all().select_related('library', 'book')
+    serializer_class = LibraryBookSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_authenticated and self.request.user.user_role == 'librarian':
+            return qs.filter(library=self.request.user)
+        return qs
+
+    def perform_create(self, serializer):
+        serializer.save(library=self.request.user)
 
 class BookLikeViewSet(CustomModelViewSet):
     queryset = BookLike.objects.all().select_related('user', 'book')

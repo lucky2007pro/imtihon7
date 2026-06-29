@@ -8,6 +8,7 @@ router.register(r'authors', AuthorViewSet)
 router.register(r'books', BookViewSet)
 router.register(r'reviews', BookReviewViewSet, basename='bookreview')
 router.register(r'likes', BookLikeViewSet, basename='booklike')
+router.register(r'inventory', LibraryBookViewSet, basename='inventory')
 
 urlpatterns = [
     path('search-nearest/', SearchNearestLibraryView.as_view(), name='search-nearest'),

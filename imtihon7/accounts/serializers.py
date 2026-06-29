@@ -62,7 +62,7 @@ class SignUpSerializer(serializers.ModelSerializer):
             user = CustomUser.objects.filter(phone_number=normalized).first()
             
         if user:
-            if user.auth_status == NEW:
+            if user.auth_status in [NEW, CODE_VERIFY]:
                 user.delete()
             else:
                 raise ValidationError("Bu email yoki telefon raqami allaqachon ro'yxatdan o'tgan.")
@@ -298,11 +298,11 @@ class ProfileSerializer(serializers.ModelSerializer):
             'id', 'username', 'first_name', 'last_name',
             'email', 'phone_number', 'photo',
             'user_role', 'auth_type', 'auth_status', 'library_name', 'library_location', 'library_lat', 'library_lng', 'is_approved',
-            'created_at', 'updated_at',
+            'created_time', 'updated_time',
         ]
         read_only_fields = [
             'id', 'username', 'email', 'phone_number',
-            'auth_type', 'auth_status', 'is_approved', 'created_at', 'updated_at',
+            'auth_type', 'auth_status', 'is_approved', 'created_time', 'updated_time',
         ]
 
 
