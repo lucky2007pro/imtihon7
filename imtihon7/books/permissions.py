@@ -1,10 +1,6 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class IsAdminOrReadOnly(BasePermission):
-    """
-    Allows read for everyone, but write operations only when the user
-    is an admin (user_role == 'admin' or is_staff).
-    """
 
     message = 'Admin ruxsati talab qilinadi.'
 
@@ -20,7 +16,6 @@ class IsAdminOrReadOnly(BasePermission):
 
 
 class IsAdmin(BasePermission):
-    """Strict admin-only permission."""
 
     message = 'Ushbu amalni bajarish uchun Admin bo\'lishingiz kerak.'
 
@@ -33,10 +28,6 @@ class IsAdmin(BasePermission):
 
 
 class IsAdminOrLibrarian(BasePermission):
-    """
-    Allows read for everyone, but write operations only for admin or librarian roles.
-    Admin va Librarian foydalanuvchilariga yozish ruxsatini beradi.
-    """
 
     message = 'Bu amalni bajarish uchun Admin yoki Librarian bo\'lishingiz kerak.'
 

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'), override=True)
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-j9nzz7ar4^lrlt*gha_#r&!ye9juwd$(#x$4fluw$unws1-rkq')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'djang o-insecure-j9nzz7ar4^lrlt*gha_#r&!ye9juwd$(#x$4fluw$unws1-rkq')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() == 'true'
 ALLOWED_HOSTS = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',') if h.strip()]
 
@@ -115,10 +115,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Desktop admin token (matches password used in WinForms AdminForm)
-ADMIN_API_TOKEN = os.environ.get('ADMIN_API_TOKEN', 'TATU2026')
-
-# Gemini AI (https://aistudio.google.com/ → Get API key)
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 GEMINI_MODEL   = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash')
 
@@ -129,7 +125,7 @@ EMAIL_PORT          = int(os.environ.get('EMAIL_PORT', '587'))
 EMAIL_USE_TLS       = os.environ.get('EMAIL_USE_TLS', 'true').lower() == 'true'
 EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'TATU Kutubxona <noreply@tatu.uz>')
+DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'ONLINE Kutubxona <noreply@online.uz>')
 SITE_URL            = os.environ.get('SITE_URL', 'http://localhost:8080')
 
 CORS_ALLOW_ALL_ORIGINS = True

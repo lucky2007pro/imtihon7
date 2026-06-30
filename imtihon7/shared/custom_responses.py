@@ -10,10 +10,7 @@ def custom_response(success, message, data=None, status_code=status.HTTP_200_OK)
     }, status=status_code)
 
 class CustomModelViewSet(ModelViewSet):
-    """
-    ModelViewSet that wraps all standard responses in { success, message, data }.
-    """
-    
+
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         if 'results' in response.data or 'success' in response.data:

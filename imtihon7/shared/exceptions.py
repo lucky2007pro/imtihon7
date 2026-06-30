@@ -14,7 +14,6 @@ def custom_exception_handler(exc, context):
             if 'detail' in response.data:
                 custom_data['message'] = response.data['detail']
             else:
-                # get the first value of the dict which is usually a list of errors
                 first_error = list(response.data.values())[0]
                 if isinstance(first_error, list) and len(first_error) > 0:
                     custom_data['message'] = str(first_error[0])

@@ -39,7 +39,7 @@
         <p>&copy; 2026 TATU Kutubxona. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=10"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -84,9 +84,15 @@
                             </div>
                             
                             <div class="detail-actions">
+                                ${book.pdf_file ? `
+                                <a href="${book.pdf_file}" target="_blank" class="btn-primary" style="flex: 1; justify-content: center; background: var(--success-color); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+                                    <i data-lucide="book-open"></i> O'qish (PDF)
+                                </a>
+                                ` : `
                                 <button class="btn-primary" onclick="reserveBook(${book.id})" style="flex: 1; justify-content: center;">
                                     <i data-lucide="bookmark"></i> Band qilish
                                 </button>
+                                `}
                                 <button class="btn-outline" onclick="likeBook(${book.id})">
                                     <i data-lucide="heart"></i>
                                 </button>

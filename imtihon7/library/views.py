@@ -1,8 +1,10 @@
-from shared.custom_responses import CustomModelViewSet
 from rest_framework.permissions import IsAuthenticated
+
+from books.permissions import IsAdminOrLibrarian
+from shared.custom_responses import CustomModelViewSet
 from .models import Reservation, Borrowing
 from .serializers import ReservationSerializer, BorrowingSerializer
-from books.permissions import IsAdmin, IsAdminOrLibrarian
+
 
 class ReservationViewSet(CustomModelViewSet):
     queryset = Reservation.objects.all().select_related('user', 'book', 'library')

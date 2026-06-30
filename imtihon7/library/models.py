@@ -6,7 +6,6 @@ from shared.models import BaseModel
 from books.models import Book
 
 def _default_reservation_expiry():
-    """Bron sukut bo'yicha yaratilgandan 3 kun keyin tugaydi."""
     return timezone.now() + timedelta(days=3)
 
 class Reservation(BaseModel):

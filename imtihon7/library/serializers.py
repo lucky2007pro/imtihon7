@@ -39,7 +39,7 @@ class BorrowingSerializer(serializers.ModelSerializer):
             'id', 'user', 'user_name', 'library', 'book', 'book_details', 'return_date', 
             'is_returned', 'returned_date', 'created_time', 'updated_time'
         ]
-        read_only_fields = ['user', 'library', 'is_returned', 'returned_date']
+        read_only_fields = ['library', 'is_returned', 'returned_date']
 
     def validate(self, attrs):
         book = attrs.get('book')

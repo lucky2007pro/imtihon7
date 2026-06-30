@@ -25,7 +25,13 @@
 
     <main id="app-root">
         <div class="animate-fade-in" style="margin-bottom: 2rem;">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Kitoblar Katalogi</h2>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem;">
+                <h2 style="font-size: 2rem;">Kitoblar Katalogi</h2>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--accent-primary);">
+                    <input type="checkbox" id="nearestMode" style="width: 18px; height: 18px;">
+                    <span style="font-weight: 500;">Eng yaqin kutubxonadan (GPS)</span>
+                </label>
+            </div>
             <div class="search-bar">
                 <i data-lucide="search" style="color: var(--text-secondary); margin-left: 0.5rem; margin-top: 0.25rem;"></i>
                 <input type="text" class="search-input" id="searchInput" placeholder="Kitob nomi bo'yicha qidiring...">
@@ -44,49 +50,113 @@
         <p>&copy; 2026 TATU Kutubxona. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=10"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const grid = document.getElementById('booksGrid');
-            try {
-                const response = await app.apiCall('/books/books/');
-                const books = response.results || response || [];
-                
-                if (!books.length) {
-                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center;">Kitoblar topilmadi</div>';
-                    return;
-                }
+        let userLat = null;
+        let userLng = null;
+        let isNearestMode = false;
 
-                grid.innerHTML = books.map(book => `
+        document.getElementById('nearestMode').addEventListener('change', (e) => {
+            isNearestMode = e.target.checked;
+            if (isNearestMode) {
+                if (navigator.geolocation) {
+                    app.showToast("Joylashuv aniqlanmoqda...", "success");
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+                        app.showToast("Joylashuv olindi! Kitob nomini yozib qidiring.", "success");
+                    }, (error) => {
+                        e.target.checked = false;
+                        isNearestMode = false;
+                        app.showToast("Joylashuvni aniqlashda xatolik. Ruxsat bering.", "error");
+                    });
+                } else {
+                    e.target.checked = false;
+                    isNearestMode = false;
+                    app.showToast("Brauzeringiz Geolocation qo'llab-quvvatlamaydi.", "error");
+                }
+            } else {
+                userLat = null;
+                userLng = null;
+                loadBooks(); // refresh standard
+            }
+        });
+
+        async function loadBooks(query = '') {
+            const grid = document.getElementById('booksGrid');
+            grid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 3rem;"><i data-lucide="loader" class="animate-spin" style="width: 48px; height: 48px; color: var(--accent-primary);"></i></div>';
+            lucide.createIcons();
+            
+            try {
+                let url = '/books/books/';
+                if (isNearestMode) {
+                    if (!userLat || !userLng) {
+                        app.showToast("Avval joylashuv aniqlanishini kuting", "error");
+                        return;
+                    }
+                    if (!query) {
+                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center;">Yaqin atrofdan qidirish uchun kitob nomini kiriting</div>';
+                        return;
+                    }
+                    url = `/books/search-nearest/?q=${encodeURIComponent(query)}&lat=${userLat}&lng=${userLng}`;
+                } else if (query) {
+                    url += `?search=${encodeURIComponent(query)}`;
+                }
+                
+                const response = await app.apiCall(url);
+                const books = response.results || response || [];
+                renderBooks(books, grid, isNearestMode);
+            } catch (error) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--error-color);">Xatolik yuz berdi.</div>`;
+            }
+        }
+
+        function renderBooks(books, grid, isNearest = false) {
+            if (!books.length) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center;">Kitoblar topilmadi</div>';
+                return;
+            }
+
+            grid.innerHTML = books.map(item => {
+                const book = isNearest ? {
+                    id: item.book_id,
+                    title: item.book_title,
+                    cover_image: item.cover_image,
+                    author_name: item.library_name,
+                    description: `Masofa: ${item.distance_km} km<br>Manzil: ${item.library_location}<br>Kutubxonada mavjud: ${item.available_copies} ta`,
+                    average_rating: 'N/A'
+                } : item;
+
+                return `
                     <a href="book.html?id=${book.id}" class="book-card">
                         <div class="book-cover">
                             ${book.cover_image ? `<img src="${book.cover_image}" style="width: 100%; height: 100%; object-fit: cover;" alt="${book.title}">` : '<i data-lucide="book" style="width: 64px; height: 64px;"></i>'}
                         </div>
                         <div class="book-info">
                             <h3 class="book-title">${book.title}</h3>
-                            <div class="book-author">${book.author_name || 'Noma\'lum muallif'}</div>
+                            <div class="book-author">${isNearest ? '<i data-lucide="map-pin" style="width: 16px; height: 16px;"></i> ' : ''}${book.author_name || 'Noma\'lum muallif'}</div>
                             <div class="book-desc">${book.description || 'Ta\'rif yo\'q...'}</div>
+                            ${!isNearest ? `
                             <div class="book-footer">
                                 <div class="book-stats">
                                     <span><i data-lucide="star" style="width: 16px; height: 16px;"></i> ${book.average_rating || '0.0'}</span>
                                 </div>
-                            </div>
+                            </div>` : ''}
                         </div>
                     </a>
-                `).join('');
-                lucide.createIcons();
-            } catch (error) {
-                grid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; color: var(--error-color);">
-                        Kitoblarni yuklashda xatolik yuz berdi. Backend ishlayotganini tekshiring.
-                    </div>
                 `;
-            }
-        });
+            }).join('');
+            lucide.createIcons();
+        }
 
         function searchBooks() {
-            app.showToast('Qidiruv hozircha frontendda simulyatsiya qilinmoqda', 'success');
+            const query = document.getElementById('searchInput').value.trim();
+            loadBooks(query);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBooks();
+        });
     </script>
 </body>
 </html>

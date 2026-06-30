@@ -31,10 +31,8 @@ class BookSerializer(serializers.ModelSerializer):
             user = request.user
             user_role = getattr(user, 'user_role', '')
             if user_role == 'librarian':
-                # Librarian faqat o'z bo'limlarini tanlaydi
                 self.fields['section_id'].queryset = Section.objects.filter(library=user)
             else:
-                # Admin barcha bo'limlarni ko'radi
                 self.fields['section_id'].queryset = Section.objects.all()
         else:
             self.fields['section_id'].queryset = Section.objects.all()

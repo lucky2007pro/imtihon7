@@ -1,20 +1,23 @@
-from rest_framework import filters
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from shared.custom_responses import CustomModelViewSet
-from .permissions import IsAdminOrReadOnly, IsAdminOrLibrarian
 import math
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from drf_spectacular.utils import extend_schema, OpenApiParameter
-from drf_spectacular.types import OpenApiTypes
+
 from django.db import models
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from rest_framework import filters
+from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from shared.custom_responses import CustomModelViewSet
 from .models import Section, Author, Book, BookReview, BookLike, LibraryBook
+from .permissions import IsAdminOrLibrarian
 from .serializers import (
-    SectionSerializer, AuthorSerializer, BookSerializer, 
+    SectionSerializer, AuthorSerializer, BookSerializer,
     BookReviewSerializer, BookLikeSerializer, NearestLibrarySerializer,
     LibraryBookSerializer
 )
+
 
 class SectionViewSet(CustomModelViewSet):
     queryset = Section.objects.all()
@@ -26,14 +29,12 @@ class SectionViewSet(CustomModelViewSet):
     def get_queryset(self):
         user = self.request.user
         qs = super().get_queryset()
-        # Librarian faqat o'z bo'limlarini ko'radi
         if user.is_authenticated and getattr(user, 'user_role', '') == 'librarian':
             return qs.filter(library=user)
         return qs
 
     def perform_create(self, serializer):
         user = self.request.user
-        # Librarian yaratganda avtomatik o'ziga bog'lanadi
         if user.is_authenticated and getattr(user, 'user_role', '') == 'librarian':
             serializer.save(library=user)
         else:

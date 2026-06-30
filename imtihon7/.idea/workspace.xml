@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="914fe25e-a908-4a11-ba08-1fc453f9212d" name="Changes" comment="" />
+    <list default="true" id="914fe25e-a908-4a11-ba08-1fc453f9212d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/book.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/book.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/catalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/catalog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/imtihon7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/imtihon7.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/books/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/conf/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/custom_responses.py" beforeDir="false" afterPath="$PROJECT_DIR$/shared/custom_responses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/shared/exceptions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,15 +33,90 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_D:/python najot ta'liim/django/imtihon7" value="3Fes1b4NCHSXWiaQZxyVEf9Cgg8" />
+      <entry key="_D:/yakuniy7/imtihon7" value="3FqObAK4MsYQGvMjDRsP61gtip9" />
     </persistenceIdMap>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="30" />
+    <option name="cachedIndexableFilesCount" value="216" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "lucky2007pro"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/lucky2007pro/imtihon7.git",
+    "accountId": "0de8d917-381c-46a6-8a1c-82684811c5a4"
+  }
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.4151306808115096" />
+      <entry key="MS500" value="4.031889612933396" />
+      <entry key="S2" value="7.899051674618249" />
+      <entry key="S5" value="11.351070764464868" />
+      <entry key="S10" value="13.867035599026197" />
+      <entry key="S30" value="16.379211746156948" />
+      <entry key="S60" value="17.154054743898566" />
+      <entry key="M2" value="17.567696587397922" />
+      <entry key="M5" value="17.824780107579947" />
+      <entry key="M10" value="17.912718779496412" />
+      <entry key="M15" value="17.955555432178503" />
+      <entry key="M30" value="18.42715480766758" />
+      <entry key="H1" value="21.09434523157964" />
+      <entry key="H2" value="26.38100995363917" />
+      <entry key="H4" value="31.86196126159656" />
+      <entry key="D1" value="39.13424481379864" />
+      <entry key="W1" value="40.723590870368575" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.3843173982985335" />
+      <entry key="MS500" value="4.012590815701028" />
+      <entry key="S2" value="7.887894996625426" />
+      <entry key="S5" value="11.343787111853771" />
+      <entry key="S10" value="13.862335645763393" />
+      <entry key="S30" value="16.37729140170426" />
+      <entry key="S60" value="17.15303997816798" />
+      <entry key="M2" value="17.567174630602292" />
+      <entry key="M5" value="17.82456770143497" />
+      <entry key="M10" value="17.912611784705305" />
+      <entry key="M15" value="17.955482321839284" />
+      <entry key="M30" value="18.427105087326346" />
+      <entry key="H1" value="21.094297551641635" />
+      <entry key="H2" value="26.380969258579107" />
+      <entry key="H4" value="31.861933373358074" />
+      <entry key="D1" value="39.13423864130259" />
+      <entry key="W1" value="40.72358994303164" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -32,25 +127,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/yakuniy7/imtihon7",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="imtihon7" type="Python.DjangoServer" factoryName="Django server">
       <module name="imtihon7" />
@@ -96,6 +194,7 @@
       <updated>1782446658052</updated>
       <workItem from="1782446659753" duration="470000" />
       <workItem from="1782447416862" duration="853000" />
+      <workItem from="1782799202407" duration="7053000" />
     </task>
     <servers />
   </component>

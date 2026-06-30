@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = '/api';
 
 class App {
     constructor() {
@@ -72,7 +72,33 @@ class App {
             const data = await response.json().catch(() => ({}));
             
             if (!response.ok) {
-                throw new Error(data.detail || data.message || 'Xatolik yuz berdi');
+                let errorMsg = 'Xatolik yuz berdi';
+                if (data.data && typeof data.data === 'object') {
+                    const fields = Object.values(data.data);
+                    if (fields.length > 0) {
+                        const firstError = fields[0];
+                        if (Array.isArray(firstError) && firstError.length > 0) {
+                            errorMsg = firstError[0];
+                        } else if (typeof firstError === 'string') {
+                            errorMsg = firstError;
+                        }
+                    }
+                } else if (data.detail) {
+                    errorMsg = data.detail;
+                } else if (data.message && data.message !== 'Xatolik yuz berdi.') {
+                    errorMsg = data.message;
+                } else if (data && typeof data === 'object') {
+                    const fields = Object.values(data);
+                    if (fields.length > 0) {
+                        const firstError = fields[0];
+                        if (Array.isArray(firstError) && firstError.length > 0) {
+                            errorMsg = firstError[0];
+                        } else if (typeof firstError === 'string') {
+                            errorMsg = firstError;
+                        }
+                    }
+                }
+                throw new Error(errorMsg);
             }
             return data;
         } catch (error) {
